@@ -1,7 +1,7 @@
 require 'app_helper'
 
 describe 'visit unavailability method' do 
-  let(:url){ "offenders/#{offender_id}" }
+  let(:url){ "offenders/#{offender_id}/visits/unavailability" }
 
   context 'given a valid offender ID' do
     let(:offender_id){ ENV['NOMIS_API_OFFENDER_ID'] }
