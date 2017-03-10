@@ -7,12 +7,6 @@ require 'nomis/api/parsed_response'
 
 module NOMIS
   module API
-    URLS = {
-      dev: 'https://noms-api-dev.dsd.io/nomisapi/',
-      preprod: 'https://noms-api-preprod.dsd.io/nomisapi/',
-      prod: 'https://noms-api.service.justice.gov.uk/nomisapi/'
-    }.freeze
-
     # Convenience wrapper around an API call
     # Manages defaulting of params from env vars,
     # and parsing the returned JSON
@@ -32,6 +26,7 @@ module NOMIS
 
         req = Net::HTTP::Get.new(uri)
         req['Authorization'] = auth_token
+
         ParsedResponse.new(get_response(req))
       end
 

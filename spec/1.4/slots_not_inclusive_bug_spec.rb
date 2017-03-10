@@ -12,7 +12,7 @@ describe 'prison slots' do
     end
 
   context 'given a start and end date' do
-    let(:params){ {start_date: start_date, end_date: end_date} }
+    let(:params){ {start_date: start_date.strftime("%Y-%m-%d"), end_date: end_date.strftime("%Y-%m-%d")} }
 
     context 'in the future' do
       # 86400 seconds in a day
