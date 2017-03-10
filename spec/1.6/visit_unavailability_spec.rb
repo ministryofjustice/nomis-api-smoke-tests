@@ -4,11 +4,14 @@ describe 'visit unavailability method' do
   let(:url){ "offenders/#{offender_id}" }
 
   context 'given a valid offender ID' do
-    # TODO: this is a hard-coded ID from prod/pre-prod
-    # so it will fail if this ID does not exist
-    # need to find a way of getting a valid one from any
-    # given DB
-    let(:offender_id){ 1820518 }
+    let(:offender_id){ ENV['NOMIS_API_OFFENDER_ID'] }
+
+    # Bomb out if no offender_id is given - we need to know a valid
+    # identifier for lots of methods, and there is no way of retrieving
+    # one without knowing more corroborating details (by design)
+    it 'has the required environment variables set' do
+      expect(offender_id).to_not be_nil, "You must supply a valid NOMIS_API_OFFENDER_ID environment variable"
+    end
 
     context 'given dates in YYYY-MM-DD format' do
       let(:params){ {dates: dates.map{|dt| dt.strftime("%Y-%m-%d")}} }

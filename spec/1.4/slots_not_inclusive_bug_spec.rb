@@ -1,7 +1,15 @@
 require 'app_helper'
 
 describe 'prison slots' do
-  let(:url){ 'prison/CFI/slots' }
+  let(:url){ "prison/#{prison_id}/slots" }
+  let(:prison_id){ ENV['NOMIS_API_PRISON_ID'] }
+
+    # Bomb out if no prison_id is given - we need to know a valid
+    # identifier for lots of methods, and there is no way of retrieving
+    # one without knowing more corroborating details (by design)
+    it 'has the required environment variables set' do
+      expect(prison_id).to_not be_nil, "You must supply a valid NOMIS_API_PRISON_ID environment variable"
+    end
 
   context 'given a start and end date' do
     let(:params){ {start_date: start_date, end_date: end_date} }
