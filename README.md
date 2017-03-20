@@ -1,5 +1,8 @@
 # nomis-api-smoke-tests
-A non-exhaustive set of smoke tests to allow validation that a particular version of https://github.com/ministryofjustice/nomis-api has been deployed and is working on a given URL
+A non-exhaustive set of smoke tests to allow validation that a particular version of https://github.com/ministryofjustice/nomis-api has been deployed and is working on a given URL.
+
+
+NOTE: These are *smoke tests*, designed to be performed _after_ a release - _not_ functional tests for running before a release. They require a genuine running instance of the API to hit.
 
 # Setup
 
@@ -18,7 +21,6 @@ From the root directory, type:
 
 ## Environment variables
 
-These are smoke tests, designed to be performed against a genuine running instance of the API, for the purpose of verify
 ```bash
 NOMIS_API_CLIENT_KEY_FILE=(path to your client private key file)
 NOMIS_API_CLIENT_TOKEN_FILE=(path to your client token file)
@@ -40,4 +42,36 @@ NOMIS_API_PRISON_ID=(3 letter id of a valid prison - this can be any prison, doe
 From the root directory, type:
 ```ruby
 > rspec
+```
+
+### Running tests for a specific release
+Each released version of the API has its own directory of tests, under spec/
+This allows you to run tests for particular versions against particular environments.
+
+To run the tests for, say, version 1.6:
+```ruby
+> rspec spec/1.6
+```
+
+You can vary the deployed environment you are running against by providing different values for
+NOMIS_API_BASE_URL (and NOMIS_API_CLIENT_TOKEN_FILE)
+
+
+# Troubleshooting
+
+### 'iat skew too large'
+We do not yet have an NNTP server in the Quantum environment, hence time can drift on any of the VMs.
+This can cause issues if the drift is more than 10s, as the API Gateway will check the 'iat' timestamp
+in each request payload, and reject any that are outside the +/- 10s range.
+
+To work around this, you can provide an environment variable NOMIS_API_IAT_FUDGE_FACTOR, set to a number of seconds (default is 0). This value will be added to your timestamp before generating the Bearer token.
+
+For example, if you receive an error message that says:
+```
+iat skew too large (11)
+```
+- then the server time has drifted more than 10s into the past, and you should be able to workaround it
+by providing a negative value for NOMIS_API_IAT_FUDGE_FACTOR like so:
+```bash
+> NOMIS_API_IAT_FUDGE_FACTOR=-5 rspec
 ```
