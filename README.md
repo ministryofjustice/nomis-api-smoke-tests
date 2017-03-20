@@ -21,7 +21,7 @@ From the root directory, type:
 These are smoke tests, designed to be performed against a genuine running instance of the API, for the purpose of verify
 ```bash
 NOMIS_API_CLIENT_KEY_FILE=(path to your client private key file)
-NOMIS_API_CLIENT_TOKEN_FILE=(path to your client token file - see )
+NOMIS_API_CLIENT_TOKEN_FILE=(path to your client token file)
 ```
 If you don't have these, see ["Getting a client token"](https://github.com/ministryofjustice/noms-api-gateway#getting-a-client-token) in the [noms-api-gateway](https://github.com/ministryofjustice/noms-api-gateway) repo.
 
