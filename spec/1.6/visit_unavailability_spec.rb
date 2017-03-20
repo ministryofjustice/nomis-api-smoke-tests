@@ -20,7 +20,7 @@ describe 'visit unavailability method' do
         let(:dates){ [Time.now + 86400] }
 
         describe 'the response' do
-          let(:response){ NOMIS::API::Request.new(path: url, params: params).execute }
+          let(:response){ NOMIS::API::Get.new(path: url, params: params).execute }
 
           describe 'status' do
             it 'should be 200' do

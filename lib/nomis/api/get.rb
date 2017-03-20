@@ -10,7 +10,7 @@ module NOMIS
     # Convenience wrapper around an API call
     # Manages defaulting of params from env vars,
     # and parsing the returned JSON
-    class Request
+    class Get
       attr_accessor :params, :auth_token, :base_url, :path
 
       def initialize(opts={})
