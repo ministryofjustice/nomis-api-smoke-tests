@@ -56,6 +56,21 @@ To run the tests for, say, version 1.6:
 You can vary the deployed environment you are running against by providing different values for
 NOMIS_API_BASE_URL (and NOMIS_API_CLIENT_TOKEN_FILE)
 
+### Running through Docker
+
+A dockerfile is supplied to help you run the tests through docker, to build, from root directory, run:
+```
+docker build -t nomis-api-smoke-tests .
+```
+
+To run through the tests create an env variable file in the standard docker format (no need for `""`) with the non sensitive variables:
+```
+VARNAME=VALUE
+VAR2=VALUE
+```
+
+The sensitive vars like TOKENS can be passed through the docker flag `-e 'TOKEN=FOO'`. Run the tests as described in [Running tests for a specific release](#running-tests-for-a-specific-release) through an interactive shell: `docker run -ti --env-file=.env -e TOKEN=abcdef nomis-api-smoke-tests bash`
+
 
 # Troubleshooting
 
@@ -75,3 +90,5 @@ by providing a negative value for NOMIS_API_IAT_FUDGE_FACTOR like so:
 ```bash
 > NOMIS_API_IAT_FUDGE_FACTOR=-5 rspec
 ```
+
+
