@@ -79,10 +79,14 @@ module NOMIS
       end
 
       def read_client_token_file(path)
+        raise "Couldn't read client token file (#{path})" \
+          unless path && File.exists?(File.expand_path(path))
         File.open(File.expand_path(path), 'r').read.chomp('')
       end
 
       def read_client_key_file(path)
+        raise "Couldn't read client key file (#{path})" \
+          unless path && File.exists?(File.expand_path(path))
         File.open(File.expand_path(path), 'r').read
       end
 
