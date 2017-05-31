@@ -1,3 +1,10 @@
+PATH
+  remote: ../nomis-api-client-ruby
+  specs:
+    nomis-api-client (0.0.4)
+      jwt
+      openssl
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -24,9 +31,8 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  jwt
-  openssl
+  nomis-api-client!
   rspec
 
 BUNDLED WITH
-   1.12.5
+   1.14.6

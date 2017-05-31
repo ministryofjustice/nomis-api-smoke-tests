@@ -3,5 +3,4 @@ source 'https://rubygems.org'
 gem 'rspec'
 gem 'byebug'
 
-gem 'jwt'
-gem 'openssl'
+gem 'nomis-api-client', path: '~/projects/nomis-api-client-ruby/'
