@@ -1,4 +1,4 @@
 coverage
 .bundle
 .byebug_history
-
+*.env
